@@ -1,0 +1,11 @@
+: 101130 parameters
+conv1: 128 parameters
+bn1: 64 parameters
+conv2: 6208 parameters
+bn2: 128 parameters
+conv3: 24704 parameters
+bn3: 256 parameters
+skip: 4352 parameters
+skip.0: 4096 parameters
+skip.1: 256 parameters
+fc: 65290 parameters

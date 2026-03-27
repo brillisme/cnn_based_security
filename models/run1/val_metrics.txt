@@ -1,0 +1,8 @@
+Validation Accuracy: 1.0000
+Validation Precision: 1.0000
+Validation Recall: 1.0000
+Validation F1 Score: 1.0000
+Validation Inference Speed: 58796.62 samples/second
+Validation Confusion Matrix:
+[[23851     0]
+ [    0 23886]]

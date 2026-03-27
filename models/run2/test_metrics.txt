@@ -1,0 +1,8 @@
+Test Accuracy: 0.9999
+Test Precision: 0.9999
+Test Recall: 0.9999
+Test F1 Score: 0.9999
+Inference Speed: 59195.98 samples/second
+Test Confusion Matrix:
+[[36997     3]
+ [    2 45330]]

@@ -1,0 +1,54 @@
+# UNSW-NB15 CNN for 10-class classification
+model_module: models.CBR
+model_class: CBR
+params:
+      in_channels: 1
+      out_channels: 32
+      kernel_size: 3
+      stride: 1
+      padding: 1
+
+# Backbone: 网络特征提取部分
+# 格式：[from, number, module, args]
+modules:
+  - model_module: models.CBR
+    model_class: CBR
+    params:
+      in_channels: 1
+      out_channels: 32
+      kernel_size: 3
+      stride: 1
+      padding: 1  # 输入1通道 -> 输出32通道, kernel=3, stride=1, padding=1
+  - model_module: models.MIXPOOL
+    model_class: MIXPOOL
+    params: [2, 2]          # MISPOOL: kernel_size=2, stride=2
+  - model_module: models.CBR
+    model_class: CBR
+    params:
+      in_channels: 32
+      out_channels: 64
+      kernel_size: 3
+      stride: 1
+      padding: 1     # 32 -> 64 通道
+  - model_module: models.MIXPOOL
+    model_class: MIXPOOL
+    params: [ 2, 2]              # 再次池化，长度减半
+  - model_module: models.CBR
+    model_class: CBR
+    params:
+      in_channels: 64
+      out_channels: 128
+      kernel_size: 3
+      stride: 1
+      padding: 1      # 64 -> 128 通道
+
+  - model_module: models.FCClassifier
+    model_class: FCClassifier
+    params: [1536, 10, 0.5]
+  # 这里假设经过 backbone 后输出的特征图尺寸为 (128, ~12)
+  # 展平后尺寸为 128 * 12 = 1536，最后通过 dropout (0.5) 全连接映射到10类
+
+# Training hyper-parameters
+training:
+  learning_rate: 0.001   # 初始学习率
+  epochs: 30             # 训练轮次
